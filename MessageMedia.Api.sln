@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageMedia.Api.Console", "MessageMedia.Api.Console\MessageMedia.Api.Console.csproj", "{BBB60771-909A-42C7-BA47-06C5EB51F911}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageMedia.Api", "MessageMedia.Api\MessageMedia.Api.csproj", "{FE802DAD-4C83-42E1-AEEB-9BD658C24903}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B43E2052-E1F3-4B0E-93CE-DE12CCA873FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBB60771-909A-42C7-BA47-06C5EB51F911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBB60771-909A-42C7-BA47-06C5EB51F911}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBB60771-909A-42C7-BA47-06C5EB51F911}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBB60771-909A-42C7-BA47-06C5EB51F911}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE802DAD-4C83-42E1-AEEB-9BD658C24903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE802DAD-4C83-42E1-AEEB-9BD658C24903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE802DAD-4C83-42E1-AEEB-9BD658C24903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE802DAD-4C83-42E1-AEEB-9BD658C24903}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

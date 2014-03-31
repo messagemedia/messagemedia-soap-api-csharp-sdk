@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b401a968-e8a2-4342-8ae2-b8cb3612fb37" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://soap.m4u.com.au/?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="FaultResponse.xsd" MetadataType="Schema" ID="5c0e954f-e546-4ef2-9262-b4f9568cfc72" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/FaultResponse.xsd" />
+    <MetadataFile FileName="DeleteScheduledMessages.xsd" MetadataType="Schema" ID="b0293f0d-91b5-4e3a-a533-d7c61f532923" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/DeleteScheduledMessages.xsd" />
+    <MetadataFile FileName="CommonTypes.xsd" MetadataType="Schema" ID="210e8d40-b3eb-4afb-aee2-d5d2e7754580" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CommonTypes.xsd" />
+    <MetadataFile FileName="item.wsdl" MetadataType="Wsdl" ID="11b4d750-5433-49b1-b645-966379779acc" SourceId="1" SourceUrl="http://soap.m4u.com.au/?wsdl" />
+    <MetadataFile FileName="ConfirmReplies.xsd" MetadataType="Schema" ID="22a86e6d-9ce1-468d-b162-02fd18b376ed" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/ConfirmReplies.xsd" />
+    <MetadataFile FileName="UnblockNumbersResponse.xsd" MetadataType="Schema" ID="96be4327-6e45-4d28-86c3-2119f430630b" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/UnblockNumbersResponse.xsd" />
+    <MetadataFile FileName="GetBlockedNumbersResponse.xsd" MetadataType="Schema" ID="f4cb06ec-b07b-4b8f-b668-d59a5ff72626" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/GetBlockedNumbersResponse.xsd" />
+    <MetadataFile FileName="CheckUser.xsd" MetadataType="Schema" ID="62ea1f27-e6a1-44ad-a282-420140ce6805" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CheckUser.xsd" />
+    <MetadataFile FileName="ResponseTypes.xsd" MetadataType="Schema" ID="2384d0b9-6e4a-4c5c-b5b9-4643b2d7e83e" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/ResponseTypes.xsd" />
+    <MetadataFile FileName="BlockNumbersResponse.xsd" MetadataType="Schema" ID="7355f7d4-f451-46a0-b3e1-dd01ffe8dcfa" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/BlockNumbersResponse.xsd" />
+    <MetadataFile FileName="CheckReports.xsd" MetadataType="Schema" ID="872c3a62-34cc-4212-b33d-88c0824f4e93" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CheckReports.xsd" />
+    <MetadataFile FileName="RequestTypes.xsd" MetadataType="Schema" ID="6f6861d5-4cd4-4975-978f-e8941204496e" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/RequestTypes.xsd" />
+    <MetadataFile FileName="GetBlockedNumbers.xsd" MetadataType="Schema" ID="1ea60ac1-7d6c-4dda-8aa5-b06ef7ca9994" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/GetBlockedNumbers.xsd" />
+    <MetadataFile FileName="CheckUserResponse.xsd" MetadataType="Schema" ID="7157a427-26c4-4469-8ccc-fd4a75ad09f2" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CheckUserResponse.xsd" />
+    <MetadataFile FileName="ConfirmRepliesResponse.xsd" MetadataType="Schema" ID="33e5ffcf-fc31-4b65-a442-62f99d1c2ee3" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/ConfirmRepliesResponse.xsd" />
+    <MetadataFile FileName="CheckRepliesResponse.xsd" MetadataType="Schema" ID="81dc0869-d446-477a-8455-f53805edc2aa" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CheckRepliesResponse.xsd" />
+    <MetadataFile FileName="SendMessagesResponse.xsd" MetadataType="Schema" ID="7b5478ee-da52-49a7-8d7a-7e4760399714" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/SendMessagesResponse.xsd" />
+    <MetadataFile FileName="UnblockNumbers.xsd" MetadataType="Schema" ID="4997c47d-cf1f-4346-b556-435abe23ff36" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/UnblockNumbers.xsd" />
+    <MetadataFile FileName="BlockNumbers.xsd" MetadataType="Schema" ID="a453a68f-c0cf-4722-b80c-cef41c3814c8" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/BlockNumbers.xsd" />
+    <MetadataFile FileName="DeleteScheduledMessagesResponse.xsd" MetadataType="Schema" ID="e484887a-5a12-4833-8980-a38e33ebb3ca" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/DeleteScheduledMessagesResponse.xsd" />
+    <MetadataFile FileName="SendMessages.xsd" MetadataType="Schema" ID="4a5d14f2-9019-43a3-86c3-e63d184fef54" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/SendMessages.xsd" />
+    <MetadataFile FileName="CheckReplies.xsd" MetadataType="Schema" ID="b62c031e-6bf4-4def-8d47-bcd0efc3fdb6" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CheckReplies.xsd" />
+    <MetadataFile FileName="ConfirmReports.xsd" MetadataType="Schema" ID="b726d3b8-822f-41df-b1d8-37250e1a8125" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/ConfirmReports.xsd" />
+    <MetadataFile FileName="ConfirmReportsResponse.xsd" MetadataType="Schema" ID="642f2d6b-4a8e-494b-a60a-554ca756dafc" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/ConfirmReportsResponse.xsd" />
+    <MetadataFile FileName="CheckReportsResponse.xsd" MetadataType="Schema" ID="886d7196-eda2-46e1-a4cd-ed9f22ebc81e" SourceId="1" SourceUrl="http://xml.m4u.com.au/2009/CheckReportsResponse.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

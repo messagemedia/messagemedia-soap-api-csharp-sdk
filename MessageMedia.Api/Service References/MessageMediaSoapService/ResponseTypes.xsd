@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CommonTypes.xsd" />
+  <xsd:complexType name="SendMessagesResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="SendMessagesResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckUserResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="CheckUserResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckRepliesResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="CheckRepliesResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckReportsResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="CheckReportsResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmRepliesResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="ConfirmRepliesResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmReportsResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="ConfirmReportsResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="FaultResponseType">
+    <xsd:sequence>
+      <xsd:element name="error" type="FaultResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeleteScheduledMessagesResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="DeleteScheduledMessagesResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BlockNumbersResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="BlockNumbersResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UnblockNumbersResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="UnblockNumbersResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="GetBlockedNumbersResponseType">
+    <xsd:sequence>
+      <xsd:element name="result" type="GetBlockedNumbersResultType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SendMessagesResultType">
+    <xsd:sequence>
+      <xsd:element name="accountDetails" type="AccountDetailsType" />
+      <xsd:element minOccurs="0" name="errors" type="MessageErrorListType" />
+    </xsd:sequence>
+    <xsd:attribute name="sent" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="scheduled" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="failed" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="CheckUserResultType">
+    <xsd:sequence>
+      <xsd:element name="accountDetails" type="AccountDetailsType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckRepliesResultType">
+    <xsd:sequence>
+      <xsd:element name="replies" type="ReplyListType" />
+    </xsd:sequence>
+    <xsd:attribute name="returned" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="remaining" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="CheckReportsResultType">
+    <xsd:sequence>
+      <xsd:element name="reports" type="ReportListType" />
+    </xsd:sequence>
+    <xsd:attribute name="returned" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="remaining" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmRepliesResultType">
+    <xsd:attribute name="confirmed" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmReportsResultType">
+    <xsd:attribute name="confirmed" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="FaultResultType">
+    <xsd:sequence />
+    <xsd:attribute name="code" type="FaultErrorCodeType" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="DeleteScheduledMessagesResultType">
+    <xsd:attribute name="unscheduled" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="FaultErrorCodeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="authenticationFailed" />
+      <xsd:enumeration value="invalidDataFormat" />
+      <xsd:enumeration value="perDayMessageLimit" />
+      <xsd:enumeration value="requestSizeLimit" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="AccountDetailsType">
+    <xsd:attribute fixed="daily" name="type" type="xsd:string" use="required" />
+    <xsd:attribute name="creditLimit" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="creditRemaining" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="MessageErrorListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="error" type="MessageErrorType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MessageErrorType">
+    <xsd:sequence>
+      <xsd:element name="recipients" type="RecipientsType" />
+      <xsd:element minOccurs="0" name="content" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute name="code" type="MessageErrorCodeType" use="required" />
+    <xsd:attribute name="sequenceNumber" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="MessageErrorCodeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="invalidRecipient" />
+      <xsd:enumeration value="recipientBlocked" />
+      <xsd:enumeration value="emptyMessageContent" />
+      <xsd:enumeration value="messageLengthLimit" />
+      <xsd:enumeration value="other" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="ReplyListType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="reply" type="ReplyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReplyType">
+    <xsd:sequence>
+      <xsd:element name="origin" type="xsd:string" />
+      <xsd:element name="received" type="xsd:dateTime" />
+      <xsd:element name="content" type="xsd:string" />
+    </xsd:sequence>
+    <xsd:attribute name="format" type="MessageFormatType" use="required" />
+    <xsd:attribute name="uid" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="receiptId" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="ReportListType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" maxOccurs="unbounded" name="report" type="ReportType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ReportType">
+    <xsd:sequence>
+      <xsd:element name="recipient" type="xsd:string" />
+      <xsd:element name="timestamp" type="xsd:dateTime" />
+    </xsd:sequence>
+    <xsd:attribute name="uid" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="receiptId" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="status" type="DeliveryStatusType" use="required" />
+  </xsd:complexType>
+  <xsd:simpleType name="DeliveryStatusType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="delivered" />
+      <xsd:enumeration value="pending" />
+      <xsd:enumeration value="failed" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="BlockNumbersResultType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="errors" type="MessageErrorListType" />
+    </xsd:sequence>
+    <xsd:attribute name="blocked" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="failed" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="UnblockNumbersResultType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="errors" type="MessageErrorListType" />
+    </xsd:sequence>
+    <xsd:attribute name="unblocked" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="failed" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="GetBlockedNumbersResultType">
+    <xsd:sequence>
+      <xsd:element name="recipients" type="RecipientsType" />
+    </xsd:sequence>
+    <xsd:attribute name="found" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="returned" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:include schemaLocation="CommonTypes.xsd" />
+  <xsd:complexType name="SendMessagesRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="SendMessagesBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckUserRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckRepliesRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="CheckRepliesBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckReportsRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="CheckReportsBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmRepliesRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="ConfirmRepliesBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmReportsRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="ConfirmReportsBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeleteScheduledMessagesRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="DeleteScheduledMessagesBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="BlockNumbersRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="BlockNumbersBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UnblockNumbersRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="UnblockNumbersBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="GetBlockedNumbersRequestType">
+    <xsd:sequence>
+      <xsd:element name="authentication" type="AuthenticationType" />
+      <xsd:element name="requestBody" type="GetBlockedNumbersBodyType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="AuthenticationType">
+    <xsd:sequence>
+      <xsd:element name="userId" type="xsd:string" />
+      <xsd:element name="password" type="xsd:string" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="SendMessagesBodyType">
+    <xsd:sequence>
+      <xsd:element name="messages" type="MessageListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckRepliesBodyType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="maximumReplies" type="xsd:unsignedInt" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckReportsBodyType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="maximumReports" type="xsd:unsignedInt" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmRepliesBodyType">
+    <xsd:sequence>
+      <xsd:element name="replies" type="ConfirmReplyListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmReportsBodyType">
+    <xsd:sequence>
+      <xsd:element name="reports" type="ConfirmReportListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MessageListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="message" type="MessageType" />
+    </xsd:sequence>
+    <xsd:attribute default="normal" name="sendMode" type="MessageSendModeType" use="optional" />
+  </xsd:complexType>
+  <xsd:simpleType name="MessageSendVersionType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="1" />
+      <xsd:enumeration value="2" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="MessageSendModeType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="dropAll" />
+      <xsd:enumeration value="dropAllWithErrors" />
+      <xsd:enumeration value="dropAllWithSuccess" />
+      <xsd:enumeration value="normal" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="CheckRepliesType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="maximumReplies" type="xsd:unsignedInt" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CheckReportListType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="maximumReports" type="xsd:unsignedInt" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmReplyListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="reply" type="ConfirmItemType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmReportListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="report" type="ConfirmItemType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="DeleteScheduledMessagesBodyType">
+    <xsd:sequence>
+      <xsd:element name="messages" type="MessageIdListType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MessageIdListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="message" type="MessageIdType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MessageIdType">
+    <xsd:sequence />
+    <xsd:attribute name="messageId" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="MessageTagType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <xsd:attribute name="name" type="xsd:string" use="required" />
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="MessageTagListType">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" name="tag" type="MessageTagType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="MessageType">
+    <xsd:all>
+      <xsd:element minOccurs="0" name="origin" type="xsd:string" />
+      <xsd:element name="recipients" type="RecipientsType" />
+      <xsd:element name="content" type="xsd:string" />
+      <xsd:element minOccurs="0" name="scheduled" type="xsd:dateTime" />
+      <xsd:element minOccurs="0" default="false" name="deliveryReport" type="xsd:boolean" />
+      <xsd:element minOccurs="0" default="169" name="validityPeriod" type="xsd:unsignedByte" />
+      <xsd:element minOccurs="0" name="tags" type="MessageTagListType" />
+    </xsd:all>
+    <xsd:attribute default="SMS" name="format" type="MessageFormatType" use="optional" />
+    <xsd:attribute default="0" name="sequenceNumber" type="xsd:unsignedInt" use="optional" />
+    <xsd:anyAttribute processContents="lax" />
+  </xsd:complexType>
+  <xsd:complexType name="ConfirmItemType">
+    <xsd:sequence />
+    <xsd:attribute name="receiptId" type="xsd:unsignedInt" use="required" />
+  </xsd:complexType>
+  <xsd:complexType name="BlockNumbersBodyType">
+    <xsd:sequence>
+      <xsd:element name="recipients" type="RecipientsType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="UnblockNumbersBodyType">
+    <xsd:sequence>
+      <xsd:element name="recipients" type="RecipientsType" />
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="GetBlockedNumbersBodyType">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="maximumRecipients" type="xsd:unsignedInt" />
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>

@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FE802DAD-4C83-42E1-AEEB-9BD658C24903}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MessageMedia.Api</RootNamespace>
+    <AssemblyName>MessageMedia.Api</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MessageMediaSoapService.cs" />
+    <Compile Include="MessageMediaSoapClient.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\MessageMediaSoapService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Service References\MessageMediaSoapService\BlockNumbers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\BlockNumbersResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CheckReplies.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CheckRepliesResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CheckReports.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CheckReportsResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CheckUser.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CheckUserResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\CommonTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\ConfirmReplies.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\ConfirmRepliesResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\ConfirmReports.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\ConfirmReportsResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\DeleteScheduledMessages.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\DeleteScheduledMessagesResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\FaultResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\GetBlockedNumbers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\GetBlockedNumbersResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\item.wsdl" />
+    <None Include="Service References\MessageMediaSoapService\RequestTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\ResponseTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\SendMessages.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\SendMessagesResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\UnblockNumbers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\MessageMediaSoapService\UnblockNumbersResponse.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MessageMediaSoapService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MessageMediaSoapService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MessageMediaSoapService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MessageMediaSoapService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://xml.m4u.com.au/2009" xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:api="http://xml.m4u.com.au/2009" targetNamespace="http://xml.m4u.com.au/2009" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/SendMessages.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/CheckUser.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/CheckReplies.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/CheckReports.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/ConfirmReplies.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/ConfirmReports.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/BlockNumbers.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/UnblockNumbers.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/GetBlockedNumbers.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/SendMessagesResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/CheckUserResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/CheckRepliesResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/CheckReportsResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/ConfirmRepliesResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/ConfirmReportsResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/BlockNumbersResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/UnblockNumbersResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/GetBlockedNumbersResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/FaultResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/DeleteScheduledMessages.xsd" namespace="http://xml.m4u.com.au/2009" />
+      <xsd:import schemaLocation="http://xml.m4u.com.au/2009/DeleteScheduledMessagesResponse.xsd" namespace="http://xml.m4u.com.au/2009" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="sendMessagesRequest">
+    <wsdl:part name="parameters" element="api:sendMessages" />
+  </wsdl:message>
+  <wsdl:message name="sendMessagesResponse">
+    <wsdl:part name="parameters" element="api:sendMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkUserRequest">
+    <wsdl:part name="parameters" element="api:checkUser" />
+  </wsdl:message>
+  <wsdl:message name="checkUserResponse">
+    <wsdl:part name="parameters" element="api:checkUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkRepliesRequest">
+    <wsdl:part name="parameters" element="api:checkReplies" />
+  </wsdl:message>
+  <wsdl:message name="checkRepliesResponse">
+    <wsdl:part name="parameters" element="api:checkRepliesResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkReportsRequest">
+    <wsdl:part name="parameters" element="api:checkReports" />
+  </wsdl:message>
+  <wsdl:message name="checkReportsResponse">
+    <wsdl:part name="parameters" element="api:checkReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmRepliesRequest">
+    <wsdl:part name="parameters" element="api:confirmReplies" />
+  </wsdl:message>
+  <wsdl:message name="confirmRepliesResponse">
+    <wsdl:part name="parameters" element="api:confirmRepliesResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirmReportsRequest">
+    <wsdl:part name="parameters" element="api:confirmReports" />
+  </wsdl:message>
+  <wsdl:message name="confirmReportsResponse">
+    <wsdl:part name="parameters" element="api:confirmReportsResponse" />
+  </wsdl:message>
+  <wsdl:message name="faultResponse">
+    <wsdl:part name="detail" element="api:faultResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteScheduledMessagesRequest">
+    <wsdl:part name="parameters" element="api:deleteScheduledMessages" />
+  </wsdl:message>
+  <wsdl:message name="deleteScheduledMessagesResponse">
+    <wsdl:part name="parameters" element="api:deleteScheduledMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="blockNumbersRequest">
+    <wsdl:part name="parameters" element="api:blockNumbers" />
+  </wsdl:message>
+  <wsdl:message name="blockNumbersResponse">
+    <wsdl:part name="parameters" element="api:blockNumbersResponse" />
+  </wsdl:message>
+  <wsdl:message name="unblockNumbersRequest">
+    <wsdl:part name="parameters" element="api:unblockNumbers" />
+  </wsdl:message>
+  <wsdl:message name="unblockNumbersResponse">
+    <wsdl:part name="parameters" element="api:unblockNumbersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBlockedNumbersRequest">
+    <wsdl:part name="parameters" element="api:getBlockedNumbers" />
+  </wsdl:message>
+  <wsdl:message name="getBlockedNumbersResponse">
+    <wsdl:part name="parameters" element="api:getBlockedNumbersResponse" />
+  </wsdl:message>
+  <wsdl:portType name="MessageMediaServiceInterface">
+    <wsdl:operation name="sendMessages">
+      <wsdl:input name="sendMessagesRequest" message="api:sendMessagesRequest" />
+      <wsdl:output name="sendMessagesResponse" message="api:sendMessagesResponse" />
+      <wsdl:fault name="sendMessagesFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkUser">
+      <wsdl:input name="checkUserRequest" message="api:checkUserRequest" />
+      <wsdl:output name="checkUserResponse" message="api:checkUserResponse" />
+      <wsdl:fault name="checkUserFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkReplies">
+      <wsdl:input name="checkRepliesRequest" message="api:checkRepliesRequest" />
+      <wsdl:output name="checkRepliesResponse" message="api:checkRepliesResponse" />
+      <wsdl:fault name="checkRepliesFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkReports">
+      <wsdl:input name="checkReportsRequest" message="api:checkReportsRequest" />
+      <wsdl:output name="checkReportsResponse" message="api:checkReportsResponse" />
+      <wsdl:fault name="checkReportsFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmReplies">
+      <wsdl:input name="confirmRepliesRequest" message="api:confirmRepliesRequest" />
+      <wsdl:output name="confirmRepliesResponse" message="api:confirmRepliesResponse" />
+      <wsdl:fault name="confirmRepliesFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="confirmReports">
+      <wsdl:input name="confirmReportsRequest" message="api:confirmReportsRequest" />
+      <wsdl:output name="confirmReportsResponse" message="api:confirmReportsResponse" />
+      <wsdl:fault name="confirmReportsFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteScheduledMessages">
+      <wsdl:input name="deleteScheduledMessagesRequest" message="api:deleteScheduledMessagesRequest" />
+      <wsdl:output name="deleteScheduledMessagesResponse" message="api:deleteScheduledMessagesResponse" />
+      <wsdl:fault name="deleteScheduledMessagesFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="blockNumbers">
+      <wsdl:input name="blockNumbersRequest" message="api:blockNumbersRequest" />
+      <wsdl:output name="blockNumbersResponse" message="api:blockNumbersResponse" />
+      <wsdl:fault name="blockNumbersFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="unblockNumbers">
+      <wsdl:input name="unblockNumbersRequest" message="api:unblockNumbersRequest" />
+      <wsdl:output name="unblockNumbersResponse" message="api:unblockNumbersResponse" />
+      <wsdl:fault name="unblockNumbersFault" message="api:faultResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getBlockedNumbers">
+      <wsdl:input name="getBlockedNumbersRequest" message="api:getBlockedNumbersRequest" />
+      <wsdl:output name="getBlockedNumbersResponse" message="api:getBlockedNumbersResponse" />
+      <wsdl:fault name="getBlockedNumbersFault" message="api:faultResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessageMediaServiceBinding" type="api:MessageMediaServiceInterface">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="sendMessages">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/sendMessages" />
+      <wsdl:input name="sendMessagesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="sendMessagesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="sendMessagesFault">
+        <soap:fault use="literal" name="sendMessagesFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkUser">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/checkUser" />
+      <wsdl:input name="checkUserRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkUserResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="checkUserFault">
+        <soap:fault use="literal" name="checkUserFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkReplies">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/checkReplies" />
+      <wsdl:input name="checkRepliesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkRepliesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="checkRepliesFault">
+        <soap:fault use="literal" name="checkRepliesFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="checkReports">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/checkReports" />
+      <wsdl:input name="checkReportsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="checkReportsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="checkReportsFault">
+        <soap:fault use="literal" name="checkReportsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="confirmReplies">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/confirmReplies" />
+      <wsdl:input name="confirmRepliesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="confirmRepliesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="confirmRepliesFault">
+        <soap:fault use="literal" name="confirmRepliesFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="confirmReports">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/confirmReports" />
+      <wsdl:input name="confirmReportsRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="confirmReportsResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="confirmReportsFault">
+        <soap:fault use="literal" name="confirmReportsFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteScheduledMessages">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/soap/deleteScheduledMessages" />
+      <wsdl:input name="deleteScheduledMessagesRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="deleteScheduledMessagesResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="deleteScheduledMessagesFault">
+        <soap:fault use="literal" name="deleteScheduledMessagesFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="blockNumbers">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/blockNumbers" />
+      <wsdl:input name="blockNumbersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="blockNumbersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="blockNumbersFault">
+        <soap:fault use="literal" name="blockNumbersFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="unblockNumbers">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/unblockNumbers" />
+      <wsdl:input name="unblockNumbersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="unblockNumbersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="unblockNumbersFault">
+        <soap:fault use="literal" name="unblockNumbersFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getBlockedNumbers">
+      <soap:operation soapAction="http://xml.m4u.com.au/2009/getBlockedNumbers" />
+      <wsdl:input name="getBlockedNumbersRequest">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getBlockedNumbersResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="getBlockedNumbersFault">
+        <soap:fault use="literal" name="getBlockedNumbersFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageMediaService">
+    <wsdl:port name="MessageMediaServiceEndPoint" binding="api:MessageMediaServiceBinding">
+      <wsdl:documentation>
+        <wsi:Claim conformsTo="http://ws-i.org/profiles/basic/1.0" />
+      </wsdl:documentation>
+      <soap:address location="http://soap.m4u.com.au" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
