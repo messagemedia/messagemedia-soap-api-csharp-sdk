@@ -49,7 +49,7 @@ public partial class MessageMediaSoapService : System.Web.Services.Protocols.Soa
     
     /// <remarks/>
     public MessageMediaSoapService() {
-        this.Url = "http://soap.m4u.com.au";
+        this.Url = "https://soap.m4u.com.au";
     }
     
     /// <remarks/>
@@ -1752,7 +1752,9 @@ public partial class MessageType {
         }
     }
     
-    /// <remarks/>
+    /// <summary>
+    /// (Optional) This attribute specifies a sequence number that is assigned to the message and is used to identify the message if an error occurs. Each message error in the response will specify the sequence number of the message that caused the error. Sequence numbers should be unique within the request. 1 to 2147483647.
+    /// </summary>
     [System.Xml.Serialization.XmlAttributeAttribute()]
     [System.ComponentModel.DefaultValueAttribute(typeof(uint), "0")]
     public uint sequenceNumber {
@@ -1816,7 +1818,12 @@ public partial class MessageListType {
     }
 }
 
-/// <remarks/>
+/// <summary>
+/// "dropAll" – to drop (not send) the requested messages, and return a result indicating that messages were sent / scheduled successfully or failed to send at random.
+/// "dropAllWithErrors" – to drop (not send) the requested messages, and return a result indicating that all messages failed to send.
+/// "dropAllWithSuccess" – to drop (not send) the requested messages, but return a result indicating all messages were sent / scheduled successfully.
+/// "normal" – to send the requested messages as normal.
+/// </summary>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "4.0.30319.18020")]
 [System.SerializableAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://xml.m4u.com.au/2009")]

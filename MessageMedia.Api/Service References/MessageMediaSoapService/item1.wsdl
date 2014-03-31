@@ -268,7 +268,7 @@
       <wsdl:documentation>
         <wsi:Claim conformsTo="http://ws-i.org/profiles/basic/1.0" />
       </wsdl:documentation>
-      <soap:address location="http://soap.m4u.com.au" />
+      <soap:address location="https://soap.m4u.com.au" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

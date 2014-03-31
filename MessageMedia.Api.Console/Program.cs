@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace MessageMedia.Api.Console
 {
     class Program
     {
-        // Replace the following values wtih your userId and password.
-        private static string userId = "MessageUPtyLt892";
-        private static string password = "secret";
+        // Replace the values in the App.config with your userId and password.
+        private static string userId = ConfigurationManager.AppSettings.Get("Username");
+        private static string password = ConfigurationManager.AppSettings.Get("Password");
 
-        // For this example we will use a default from and to number.
-        private static string sentFromNumber = "+61412345678";
-        private static string sentToNumber = "+61412345678";
+        // For this example we will use a default from and to number - enter the values in the App.config
+        private static string sentFromNumber = ConfigurationManager.AppSettings.Get("SentFromNumber");
+        private static string sentToNumber = ConfigurationManager.AppSettings.Get("SentToNumber");
 
         static void Main(string[] args)
         {
             CheckUserInfo();
             SendMessage();
+            SendMultipleMessages();
             CheckReplies();
+            CheckReports();
         }
 
         /// <summary>
@@ -28,6 +31,7 @@ namespace MessageMedia.Api.Console
         /// </summary>
         public static void SendMessage()
         {
+            System.Console.WriteLine("EXECUTING SEND MESSAGE...");
             try
             {
                 int messageId = 1234567890;
@@ -38,7 +42,7 @@ namespace MessageMedia.Api.Console
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Unexpected Error: {0}", ex.Message);
+                System.Console.WriteLine("Error: {0}", ex.Message);
             }
         }
 
@@ -47,14 +51,11 @@ namespace MessageMedia.Api.Console
         /// </summary>
         public static void SendMultipleMessages()
         {
+            System.Console.WriteLine("EXECUTING SEND MULTIPLE MESSAGES...");
             try
-            {
-                // As the sender you are able to define an id that represents the message.
-                // TODO: Confirm if this must be unique
-                uint messageId = 1234567890;
-                
+            {              
                 // Define how many messages you plan to send as this figure will be used to initialise various arrays.
-                int totalMessagesBeingSent = 1;
+                int totalMessagesBeingSent = 2;
 
                 // Setup the various objects required to send a message.
                 MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
@@ -68,41 +69,90 @@ namespace MessageMedia.Api.Console
                 // Create an array to store all the recipient messages.
                 MessageType[] messages = new MessageType[totalMessagesBeingSent];
 
+                #region Construct Message 1
                 // Construct the message
                 MessageType message1 = new MessageType();
                 message1.content = "Content of Message 1 to Recipient 1";
                 message1.deliveryReport = false;
                 message1.format = MessageFormatType.SMS;
                 message1.validityPeriod = 1;
+                // (Optional) This attribute specifies a sequence number that is assigned to the message and is used to identify the message if an error occurs. Each message error in the response will specify the sequence number of the message that caused the error. Sequence numbers should be unique within the request. 1 to 2147483647.
                 message1.sequenceNumber = 1;
                 message1.scheduledSpecified = false;
-                //messageType.scheduled = DateTime.Now;
-                message1.origin = "Origin 1";
+                message1.scheduled = DateTime.Now;
+                // (Optional) This element specifies the message source address. The specified address will be used wherever possible, however due to limitations with various carriers, legislation etc, the final message is not guaranteed to come from the specified address.
+                message1.origin = "Origin_1";
 
-                // It is possible to add Tags to an individual message; this might be useful if wanting to identify a particular campaign.
-                // The recipient is not able to see the tags.
-                // TODO: Confirm limits imposed on tag length and quantity
-                tags[0] = new MessageTagType { name = "My Tag Name", Value = "My Tag Value" };
-                message1.tags = tags;
+                // It is possible to add Tags to an individual message; this might be useful if wanting to identify a particular campaign or cost centre.
+                #region Message Tags
+                // Add the tags - if supported by your account type
+                //MessageTagType[] tags = new MessageTagType[1];
+                //tags[0] = new MessageTagType { name = "My Tag Name", Value = "My Tag Value" };
+                //message2.tags = tags; 
+                #endregion
+
+                // (Optional) This attribute specifies a user-defined unique ID that is assigned to a message-recipient pair. The uid is an unsigned integer that uniquely identifies a message sent to a particular recipient.
+                // uid values are used for three things: to identify a message-recipient in the case of an error; to match a reply message to the sent message it is in response to; and to match a delivery report to the sent message it is in response to.
+                // If no uid value is specified a default value of zero is assigned.
+                uint message1Id = 1234567890;
 
                 // Add the recipients
                 // TODO: Confirm the limits imposed upon recipient quantity
-                recipientType[0] = new RecipientType { uid = messageId, Value = sentToNumber };
-                message1.recipients = recipientType;
+                recipientType[0] = new RecipientType { uid = message1Id, Value = sentToNumber };
+                message1.recipients = recipientType; 
+                #endregion
+
+                #region Construct Message 2
+                // Construct the message
+                MessageType message2 = new MessageType();
+                message2.content = "Content of Message 2 to Recipient 2";
+                message2.deliveryReport = false;
+                message2.format = MessageFormatType.SMS;
+                message2.validityPeriod = 1;
+                // (Optional) This attribute specifies a sequence number that is assigned to the message and is used to identify the message if an error occurs. Each message error in the response will specify the sequence number of the message that caused the error. Sequence numbers should be unique within the request. 1 to 2147483647.
+                message2.sequenceNumber = 1;
+                message2.scheduledSpecified = false;
+                message2.scheduled = DateTime.Now;
+                // (Optional) This element specifies the message source address. The specified address will be used wherever possible, however due to limitations with various carriers, legislation etc, the final message is not guaranteed to come from the specified address.
+                message2.origin = "Origin_2";
+
+                // It is possible to add Tags to an individual message; this might be useful if wanting to identify a particular campaign or cost centre.
+                #region Message Tags
+                // Add the tags - if supported by your account type
+                //MessageTagType[] tags = new MessageTagType[1];
+                //tags[0] = new MessageTagType { name = "My Tag Name", Value = "My Tag Value" };
+                //message2.tags = tags; 
+                #endregion
+
+                // (Optional) This attribute specifies a user-defined unique ID that is assigned to a message-recipient pair. The uid is an unsigned integer that uniquely identifies a message sent to a particular recipient.
+                // uid values are used for three things: to identify a message-recipient in the case of an error; to match a reply message to the sent message it is in response to; and to match a delivery report to the sent message it is in response to.
+                // If no uid value is specified a default value of zero is assigned.
+                uint message2Id = 0987654321;
+
+                // Add the recipients
+                // TODO: Confirm the limits imposed upon recipient quantity
+                recipientType[0] = new RecipientType { uid = message2Id, Value = sentToNumber };
+                message2.recipients = recipientType;
+                #endregion
 
                 // Add the message to the messages array.
                 messages[0] = message1;
+                messages[1] = message2;
 
                 // The batch of messages are sent using a SendMessagesBodyType object.
                 SendMessagesBodyType sendMessageBody = new SendMessagesBodyType();
                 // Initiate the messages list so that it is not null.
                 sendMessageBody.messages = new MessageListType();
-                // Define the send behaviour of the messages.
-                // TODO: Define what the different options mean.
+                // Define the send behaviour of the messages.             
+                // "dropAll" – to drop (not send) the requested messages, and return a result indicating that messages were sent / scheduled successfully or failed to send at random.
+                // "dropAllWithErrors" – to drop (not send) the requested messages, and return a result indicating that all messages failed to send.
+                // "dropAllWithSuccess" – to drop (not send) the requested messages, but return a result indicating all messages were sent / scheduled successfully.
+                // "normal" – to send the requested messages as normal.
                 sendMessageBody.messages.sendMode = MessageSendModeType.normal;
+                // Attach the messages
                 sendMessageBody.messages.message = messages;
 
-                System.Console.WriteLine("Sending {0} messages", totalMessagesBeingSent);
+                System.Console.WriteLine("Sending {0} message(s)", totalMessagesBeingSent);
 
                 var result = client.SendMessage(sendMessageBody);
 
@@ -111,15 +161,22 @@ namespace MessageMedia.Api.Console
             }
             catch (Exception ex)
             {
-                System.Console.WriteLine("Unexpected Error: {0}", ex.Message);
+                System.Console.WriteLine("Error: {0}", ex.Message);
             }
         }
 
+        /// <summary>
+        /// Private method used for rendering the results to the console screen.
+        /// </summary>
+        /// <param name="result"></param>
         private static void DisplaySendMessageResult(SendMessagesResultType result)
         {
             System.Console.WriteLine("Messages sent: {0}", result.sent);
             System.Console.WriteLine("Messages failed: {0}", result.failed);
             System.Console.WriteLine("Messages scheduled: {0}", result.scheduled);
+            
+            if (result.errors == null) return;
+            
             System.Console.WriteLine("Errors total: {0}", result.errors.Length);
 
             foreach (var error in result.errors)
@@ -134,8 +191,12 @@ namespace MessageMedia.Api.Console
             }
         }
 
+        /// <summary>
+        /// Example demonstrates how to get account and credit remaining information.
+        /// </summary>
         public static void CheckUserInfo()
         {
+            System.Console.WriteLine("EXECUTING CHECK USER INFO...");
             try
             {
                 MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
@@ -143,8 +204,7 @@ namespace MessageMedia.Api.Console
 
                 System.Console.WriteLine("Credit limit: {0}", result.accountDetails.creditLimit);
                 System.Console.WriteLine("Remaining credit: {0}", result.accountDetails.creditRemaining);
-
-                string type = result.accountDetails.type;
+                System.Console.WriteLine("Account type: {0}", result.accountDetails.type);
             }
             catch (Exception ex)
             {
@@ -152,30 +212,99 @@ namespace MessageMedia.Api.Console
             }
         }
 
+        /// <summary>
+        /// Example demonstrates how to fetch replies.
+        /// </summary>
         public static void CheckReplies()
         {
-            MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
-            var reply = client.CheckReplies();
-
-            System.Console.WriteLine("Remaining credit: {0}", reply.remaining);
-            System.Console.WriteLine("Returned: {0}", reply.returned);
-            foreach (var item in reply.replies)
+            System.Console.WriteLine("EXECUTING CHECK REPLIES...");
+            try
             {
-                System.Console.WriteLine("Reply receipt id: {0}", item.receiptId);
-                System.Console.WriteLine("Reply uid: {0}", item.uid);
-                System.Console.WriteLine("Reply received date time: {0}", item.received);
-                System.Console.WriteLine("Reply origin: {0}", item.origin);
-                System.Console.WriteLine("Reply content: {0}", item.content);
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+                var reply = client.CheckReplies();
+
+                System.Console.WriteLine("Remaining replies: {0}", reply.remaining);
+                System.Console.WriteLine("Replies returned: {0}", reply.returned);
+
+                if (reply.replies == null) return;
+
+                foreach (var item in reply.replies)
+                {
+                    System.Console.WriteLine("Reply receipt id: {0}", item.receiptId);
+                    System.Console.WriteLine("Reply uid: {0}", item.uid);
+                    System.Console.WriteLine("Reply received date time: {0}", item.received);
+                    System.Console.WriteLine("Reply origin: {0}", item.origin);
+                    System.Console.WriteLine("Reply content: {0}", item.content);
+                    System.Console.WriteLine("Reply format: {0}", item.format);
+                }
             }
-
-            foreach (var item in reply.replies)
+            catch (Exception ex)
             {
-                System.Console.WriteLine(item.content);
-                System.Console.WriteLine(item.format);
-                System.Console.WriteLine(item.origin);
-                System.Console.WriteLine(item.receiptId);
-                System.Console.WriteLine(item.received);
-                System.Console.WriteLine(item.uid);
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Example demonstrates how to fetch reports on delivery status.
+        /// </summary>
+        public static void CheckReports()
+        {
+            System.Console.WriteLine("EXECUTING CHECK REPORTS...");
+            try
+            {
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+                var reply = client.CheckReports();
+
+                System.Console.WriteLine("Remaining replies: {0}", reply.remaining);
+                System.Console.WriteLine("Replies returned: {0}", reply.returned);
+
+                if (reply.reports == null) return;
+
+                // Create a list to hold the receipts of the reports you want to confirm.
+                List<uint> listOfReceiptIds = new List<uint>();
+
+                foreach (var item in reply.reports)
+                {
+                    System.Console.WriteLine("Reply receipt id: {0}", item.receiptId);
+                    System.Console.WriteLine("Reply uid: {0}", item.uid);
+                    System.Console.WriteLine("Reply received date time: {0}", item.timestamp);
+                    System.Console.WriteLine("Reply status: {0}", item.status);
+                    System.Console.WriteLine("Reply recipient: {0}", item.recipient);
+
+                    // Add the receipt of the report for each delivered message (or for every status if you choose)
+                    if(item.status == DeliveryStatusType.delivered)
+                    {
+                        listOfReceiptIds.Add(item.receiptId);
+                    }
+                }
+
+                // Confirm the receipt of each report
+                if(listOfReceiptIds.Count > 0) ConfirmReports(listOfReceiptIds);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Example demonstrates how to confirm receipt of a list of reports
+        /// </summary>
+        /// <param name="listOfReceiptIds">List of receiptId's</param>
+        public static void ConfirmReports(List<uint> listOfReceiptIds)
+        {
+            System.Console.WriteLine("EXECUTING CONFIRM REPORTS....");
+            if (listOfReceiptIds.Count == 0) return;
+            try
+            {
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+                var reply = client.ConfirmReports(listOfReceiptIds);
+
+                System.Console.WriteLine("Reports confirmed: {0}", reply.confirmed);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
             }
         }
     }

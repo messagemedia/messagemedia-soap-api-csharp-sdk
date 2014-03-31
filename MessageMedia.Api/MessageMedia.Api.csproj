@@ -110,7 +110,7 @@
     <None Include="Service References\MessageMediaSoapService\GetBlockedNumbersResponse.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\MessageMediaSoapService\item.wsdl" />
+    <None Include="Service References\MessageMediaSoapService\item1.wsdl" />
     <None Include="Service References\MessageMediaSoapService\RequestTypes.xsd">
       <SubType>Designer</SubType>
     </None>
