@@ -8,7 +8,7 @@ Send a message with the following lines of code:
 ```
 try
 {
-    MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+    MessageMediaSoapClient client = new MessageMediaSoapClient("your-userid", "your-password");
     var result = client.SendMessage("+614123456789", "+61987654321", "Test Message", 1234567890);
     System.Console.WriteLine(result.sent);
 }
