@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace MessageMedia.Api
 {
+    /// <summary>
+    /// The MessageMediaSoapClient provides a wrapper to the SOAP API to facilitate simpler interaction.
+    /// </summary>
     public class MessageMediaSoapClient
     {
         MessageMediaSoapService messageMediaSoapService;
@@ -26,10 +29,10 @@ namespace MessageMedia.Api
         /// <summary>
         /// This example demonstrates how to wrap the complexity associated with packaging up a message into a single method call for sending a single message.
         /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <param name="message"></param>
-        /// <param name="messageId"></param>
+        /// <param name="from">From phone number</param>
+        /// <param name="to">To phone number</param>
+        /// <param name="message">The content of the message</param>
+        /// <param name="messageId">Your message identifier</param>
         /// <returns>SendMessagesResultType object.</returns>
         public SendMessagesResultType SendMessage(string from, string to, string message, int messageId)
         {
@@ -56,7 +59,7 @@ namespace MessageMedia.Api
             recipientType[0] = new RecipientType { uid = (uint)messageId, Value = to};
             messageType.recipients = recipientType;
 
-            // Setup the message type - what is this for?
+            // Create an array to store all the recipient messages.
             MessageType[] messages = new MessageType[1];
             messages[0] = messageType;
 
@@ -69,6 +72,11 @@ namespace MessageMedia.Api
             return SendMessage(sendMessageBody);
         }
 
+        /// <summary>
+        /// This method takes a batch of messages which have been consructed and sends them.
+        /// </summary>
+        /// <param name="sendMessageBody">The object which contains the batch of messages.</param>
+        /// <returns>SendMessagesResultType</returns>
         public SendMessagesResultType SendMessage(SendMessagesBodyType sendMessageBody)
         {
             SendMessagesResultType result;
@@ -112,6 +120,7 @@ namespace MessageMedia.Api
 
         public ConfirmReportsResultType ConfirmReports(List<uint> listOfReceiptIds)
         {
+            // Take the list of receiptId's and prepare them for submission to the SOAP API in the expected format.
             ConfirmItemType[] confirmItemType = new ConfirmItemType[listOfReceiptIds.Count];
             int i = 0;
             foreach (var item in listOfReceiptIds)
