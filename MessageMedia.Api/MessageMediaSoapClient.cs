@@ -69,7 +69,7 @@ namespace MessageMedia.Api
             sendMessageBody.messages.sendMode = MessageSendModeType.normal;
             sendMessageBody.messages.message = messages;
 
-            return SendMessage(sendMessageBody);
+            return messageMediaSoapService.sendMessages(authentication, sendMessageBody);
         }
 
         /// <summary>
@@ -79,28 +79,7 @@ namespace MessageMedia.Api
         /// <returns>SendMessagesResultType</returns>
         public SendMessagesResultType SendMessage(SendMessagesBodyType sendMessageBody)
         {
-            SendMessagesResultType result;
-
-            result = messageMediaSoapService.sendMessages(authentication, sendMessageBody);
-            Debug.WriteLine("Messages sent: {0}", result.sent);
-            Debug.WriteLine("Messages failed: {0}", result.failed);
-            Debug.WriteLine("Messages scheduled: {0}", result.scheduled);
-
-            if (result.errors == null) return result;
-
-            foreach (var error in result.errors)
-            {
-                Debug.WriteLine("Error code: {0}", error.code);
-                Debug.WriteLine("Error content: {0}", error.content);
-                Debug.WriteLine("Error sequence number: {0}", error.sequenceNumber);
-                foreach (var recipient in error.recipients)
-                {
-                    Debug.WriteLine("Error recipient uid: {0}", recipient.uid);
-                    Debug.WriteLine("Error recipient value: {0}", recipient.Value);
-                }
-            }
-
-            return result;
+            return messageMediaSoapService.sendMessages(authentication, sendMessageBody);
         }
 
         public CheckRepliesResultType CheckReplies(uint maximumReplies = 100)
@@ -108,9 +87,23 @@ namespace MessageMedia.Api
             return messageMediaSoapService.checkReplies(authentication, new CheckRepliesBodyType { maximumReplies = maximumReplies, maximumRepliesSpecified = (int)maximumReplies > 0 ? true : false });
         }
 
-        public ConfirmRepliesResultType ConfirmReplies()
+        /// <summary>
+        /// Confirms receipt of a list or reply receipts.
+        /// </summary>
+        /// <param name="listOfReceiptIds"></param>
+        /// <returns></returns>
+        public ConfirmRepliesResultType ConfirmReplies(List<uint> listOfReceiptIds)
         {
-            throw new NotImplementedException();
+            // Take the list of receiptId's and prepare them for submission to the SOAP API in the expected format.
+            ConfirmItemType[] confirmItemType = new ConfirmItemType[listOfReceiptIds.Count];
+            int i = 0;
+            foreach (var item in listOfReceiptIds)
+            {
+                confirmItemType[i] = new ConfirmItemType { receiptId = item };
+                i++;
+            }
+
+            return messageMediaSoapService.confirmReplies(authentication, new ConfirmRepliesBodyType() { replies = confirmItemType });
         }
 
         public CheckReportsResultType CheckReports(uint maximumReports = 100)
@@ -133,36 +126,45 @@ namespace MessageMedia.Api
         }
 
         /// <summary>
-        /// Confirm a single report.
+        /// Confirm a single report. Better to send a batch of receiptIds to the ConfirmReports method which accepts a list of receiptIds.
         /// </summary>
         /// <param name="receiptId"></param>
         /// <returns></returns>
-        public ConfirmReportsResultType ConfirmReport(uint receiptId)
-        {
-            ConfirmItemType[] confirmItemType = new ConfirmItemType[1];
-            confirmItemType[0] = new ConfirmItemType { receiptId = receiptId };
+        //public ConfirmReportsResultType ConfirmReport(uint receiptId)
+        //{
+        //    ConfirmItemType[] confirmItemType = new ConfirmItemType[1];
+        //    confirmItemType[0] = new ConfirmItemType { receiptId = receiptId };
 
-            return messageMediaSoapService.confirmReports(authentication, new ConfirmReportsBodyType() { reports = confirmItemType });
+        //    return messageMediaSoapService.confirmReports(authentication, new ConfirmReportsBodyType() { reports = confirmItemType });
+        //}
+
+        public DeleteScheduledMessagesResultType DeleteScheduledMessages(List<uint> listOfMessageIds)
+        {
+            // Take the list of receiptId's and prepare them for submission to the SOAP API in the expected format.
+            MessageIdType[] messageIdType = new MessageIdType[listOfMessageIds.Count];
+            int i = 0;
+            foreach (var item in listOfMessageIds)
+            {
+                messageIdType[i] = new MessageIdType { messageId = item };
+                i++;
+            }
+
+            return messageMediaSoapService.deleteScheduledMessages(authentication, new DeleteScheduledMessagesBodyType() { messages = messageIdType });
         }
 
-        public DeleteScheduledMessagesResultType DeleteScheduledMessages()
+        public GetBlockedNumbersResultType GetBlockedNumbers(uint maximumRecipients = 100)
         {
-            throw new NotImplementedException();
+            return messageMediaSoapService.getBlockedNumbers(authentication, new GetBlockedNumbersBodyType() { maximumRecipients = maximumRecipients, maximumRecipientsSpecified = (int)maximumRecipients > 0 ? true : false });
         }
 
-        public BlockNumbersResultType GetBlockNumbers()
+        public BlockNumbersResultType BlockNumbers(RecipientType[] recipientType)
         {
-            throw new NotImplementedException();
+            return messageMediaSoapService.blockNumbers(authentication, new BlockNumbersBodyType() { recipients = recipientType });
         }
 
-        public UnblockNumbersResultType UnblockNumbers()
+        public UnblockNumbersResultType UnblockNumbers(RecipientType[] recipientType)
         {
-            throw new NotImplementedException();
-        }
-
-        public GetBlockedNumbersResultType GetBlockedNumbers()
-        {
-            throw new NotImplementedException();
+            return messageMediaSoapService.unblockNumbers(authentication, new UnblockNumbersBodyType() { recipients = recipientType });
         }
     }
 }

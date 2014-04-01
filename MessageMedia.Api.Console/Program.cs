@@ -26,6 +26,7 @@ namespace MessageMedia.Api.Console
             CheckReports();
         }
 
+        #region Sending Messages
         /// <summary>
         /// Example demonstrates how to quickly send a single message with the default settings.
         /// </summary>
@@ -53,7 +54,7 @@ namespace MessageMedia.Api.Console
         {
             System.Console.WriteLine("EXECUTING SEND MULTIPLE MESSAGES...");
             try
-            {              
+            {
                 // Define how many messages you plan to send as this figure will be used to initialise various arrays.
                 int totalMessagesBeingSent = 2;
 
@@ -99,7 +100,7 @@ namespace MessageMedia.Api.Console
                 // Add the recipients
                 // TODO: Confirm the limits imposed upon recipient quantity
                 recipientType[0] = new RecipientType { uid = message1Id, Value = sentToNumber };
-                message1.recipients = recipientType; 
+                message1.recipients = recipientType;
                 #endregion
 
                 #region Construct Message 2
@@ -174,9 +175,9 @@ namespace MessageMedia.Api.Console
             System.Console.WriteLine("Messages sent: {0}", result.sent);
             System.Console.WriteLine("Messages failed: {0}", result.failed);
             System.Console.WriteLine("Messages scheduled: {0}", result.scheduled);
-            
+
             if (result.errors == null) return;
-            
+
             System.Console.WriteLine("Errors total: {0}", result.errors.Length);
 
             foreach (var error in result.errors)
@@ -184,13 +185,19 @@ namespace MessageMedia.Api.Console
                 System.Console.WriteLine("Error code: {0}", error.code);
                 System.Console.WriteLine("Error content: {0}", error.content);
                 System.Console.WriteLine("Error sequence number: {0}", error.sequenceNumber);
-                foreach (var recipient in error.recipients)
+
+                if (error.recipients != null)
                 {
-                    System.Console.WriteLine("Error recipient: Uid: {0} Value: {1}", recipient.uid, recipient.Value);
+                    foreach (var recipient in error.recipients)
+                    {
+                        System.Console.WriteLine("Error recipient: Uid: {0} Value: {1}", recipient.uid, recipient.Value);
+                    }
                 }
             }
-        }
+        } 
+        #endregion
 
+        #region Account & User Info
         /// <summary>
         /// Example demonstrates how to get account and credit remaining information.
         /// </summary>
@@ -210,11 +217,14 @@ namespace MessageMedia.Api.Console
             {
                 System.Console.WriteLine("Error: {0}", ex.Message);
             }
-        }
+        } 
+        #endregion
 
+        #region Replies
         /// <summary>
         /// Example demonstrates how to fetch replies.
         /// </summary>
+        /// <remarks>You must then confirm receipt of each reply using the ConfirmReplies method.</remarks>
         public static void CheckReplies()
         {
             System.Console.WriteLine("EXECUTING CHECK REPLIES...");
@@ -228,6 +238,9 @@ namespace MessageMedia.Api.Console
 
                 if (reply.replies == null) return;
 
+                // Create a list to hold the receipts of the replies you want to confirm you have received.
+                List<uint> listOfReceiptIds = new List<uint>();
+
                 foreach (var item in reply.replies)
                 {
                     System.Console.WriteLine("Reply receipt id: {0}", item.receiptId);
@@ -236,7 +249,12 @@ namespace MessageMedia.Api.Console
                     System.Console.WriteLine("Reply origin: {0}", item.origin);
                     System.Console.WriteLine("Reply content: {0}", item.content);
                     System.Console.WriteLine("Reply format: {0}", item.format);
+
+                    listOfReceiptIds.Add(item.receiptId);
                 }
+
+                // Confirm the receipt of each reply
+                if (listOfReceiptIds.Count > 0) ConfirmReplies(listOfReceiptIds);
             }
             catch (Exception ex)
             {
@@ -245,8 +263,32 @@ namespace MessageMedia.Api.Console
         }
 
         /// <summary>
+        /// Example demonstrates how to confirm receipt of a list of replies.
+        /// </summary>
+        /// <param name="listOfReceiptIds">List of receiptId's</param>
+        private static void ConfirmReplies(List<uint> listOfReceiptIds)
+        {
+            System.Console.WriteLine("EXECUTING CONFIRM REPLIES....");
+            if (listOfReceiptIds.Count == 0) return;
+            try
+            {
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+                var reply = client.ConfirmReplies(listOfReceiptIds);
+
+                System.Console.WriteLine("Replies confirmed: {0}", reply.confirmed);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
+        } 
+        #endregion
+
+        #region Reports
+        /// <summary>
         /// Example demonstrates how to fetch reports on delivery status.
         /// </summary>
+        /// <remarks>You must then confirm receipt of each report using the ConfirmReports method.</remarks>
         public static void CheckReports()
         {
             System.Console.WriteLine("EXECUTING CHECK REPORTS...");
@@ -260,7 +302,7 @@ namespace MessageMedia.Api.Console
 
                 if (reply.reports == null) return;
 
-                // Create a list to hold the receipts of the reports you want to confirm.
+                // Create a list to hold the receipts of the reports you want to confirm you have received.
                 List<uint> listOfReceiptIds = new List<uint>();
 
                 foreach (var item in reply.reports)
@@ -272,14 +314,14 @@ namespace MessageMedia.Api.Console
                     System.Console.WriteLine("Reply recipient: {0}", item.recipient);
 
                     // Add the receipt of the report for each delivered message (or for every status if you choose)
-                    if(item.status == DeliveryStatusType.delivered)
+                    if (item.status == DeliveryStatusType.delivered)
                     {
                         listOfReceiptIds.Add(item.receiptId);
                     }
                 }
 
                 // Confirm the receipt of each report
-                if(listOfReceiptIds.Count > 0) ConfirmReports(listOfReceiptIds);
+                if (listOfReceiptIds.Count > 0) ConfirmReports(listOfReceiptIds);
             }
             catch (Exception ex)
             {
@@ -288,10 +330,10 @@ namespace MessageMedia.Api.Console
         }
 
         /// <summary>
-        /// Example demonstrates how to confirm receipt of a list of reports
+        /// Example demonstrates how to confirm receipt of a list of reports.
         /// </summary>
         /// <param name="listOfReceiptIds">List of receiptId's</param>
-        public static void ConfirmReports(List<uint> listOfReceiptIds)
+        private static void ConfirmReports(List<uint> listOfReceiptIds)
         {
             System.Console.WriteLine("EXECUTING CONFIRM REPORTS....");
             if (listOfReceiptIds.Count == 0) return;
@@ -306,6 +348,117 @@ namespace MessageMedia.Api.Console
             {
                 System.Console.WriteLine("Error: {0}", ex.Message);
             }
+        } 
+        #endregion
+
+        #region Scheduled Messages
+        /// <summary>
+        /// Delete a selection of scheduled messages. You will need to store which messageId's have been scheduled when you originally submit them.
+        /// </summary>
+        /// <param name="listOfMessageIds"></param>
+        public static void DeleteScheduledMessages(List<uint> listOfMessageIds)
+        {
+            System.Console.WriteLine("EXECUTING DELETE SCHEDULED MESSAGES....");
+
+            try
+            {
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+                var reply = client.DeleteScheduledMessages(listOfMessageIds);
+
+                System.Console.WriteLine("Messages unscheduled: {0}", reply.unscheduled);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
+        } 
+        #endregion
+
+        #region Block & Unblock Numbers
+        /// <summary>
+        /// Example shows how to block numbers.
+        /// </summary>
+        public static void BlockNumbers()
+        {
+            System.Console.WriteLine("EXECUTING BLOCK NUMBERS....");
+
+            try
+            {
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+
+                RecipientType[] recipientType = new RecipientType[2];
+                recipientType[0] = new RecipientType() { uid = 1, Value = "+614123456789" };
+                recipientType[1] = new RecipientType() { uid = 2, Value = "+614987654321" };
+
+                var reply = client.BlockNumbers(recipientType);
+
+                System.Console.WriteLine("Numbers blocked: {0}", reply.blocked);
+
+                if (reply.errors == null) return;
+
+                System.Console.WriteLine("Errors total: {0}", reply.errors.Length);
+
+                foreach (var error in reply.errors)
+                {
+                    System.Console.WriteLine("Error code: {0}", error.code);
+                    System.Console.WriteLine("Error content: {0}", error.content);
+                    System.Console.WriteLine("Error sequence number: {0}", error.sequenceNumber);
+
+                    if (error.recipients != null)
+                    {
+                        foreach (var recipient in error.recipients)
+                        {
+                            System.Console.WriteLine("Error recipient: Uid: {0} Value: {1}", recipient.uid, recipient.Value);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
         }
+
+        public static void UnblockNumbers()
+        {
+            System.Console.WriteLine("EXECUTING UNBLOCK NUMBERS....");
+
+            try
+            {
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+
+                RecipientType[] recipientType = new RecipientType[2];
+                recipientType[0] = new RecipientType() { uid = 1, Value = "+614123456789" };
+                recipientType[1] = new RecipientType() { uid = 2, Value = "+614987654321" };
+
+                var reply = client.UnblockNumbers(recipientType);
+
+                System.Console.WriteLine("Numbers unblocked: {0}", reply.unblocked);
+
+                if (reply.errors == null) return;
+
+                System.Console.WriteLine("Errors total: {0}", reply.errors.Length);
+
+                foreach (var error in reply.errors)
+                {
+                    System.Console.WriteLine("Error code: {0}", error.code);
+                    System.Console.WriteLine("Error content: {0}", error.content);
+                    System.Console.WriteLine("Error sequence number: {0}", error.sequenceNumber);
+
+                    if (error.recipients != null)
+                    {
+                        foreach (var recipient in error.recipients)
+                        {
+                            System.Console.WriteLine("Error recipient: Uid: {0} Value: {1}", recipient.uid, recipient.Value);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
+        } 
+        #endregion
     }
 }
