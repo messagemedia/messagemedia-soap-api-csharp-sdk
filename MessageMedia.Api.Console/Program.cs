@@ -89,7 +89,7 @@ namespace MessageMedia.Api.Console
                 // Add the tags - if supported by your account type
                 //MessageTagType[] tags = new MessageTagType[1];
                 //tags[0] = new MessageTagType { name = "My Tag Name", Value = "My Tag Value" };
-                //message2.tags = tags; 
+                //message1.tags = tags; 
                 #endregion
 
                 // (Optional) This attribute specifies a user-defined unique ID that is assigned to a message-recipient pair. The uid is an unsigned integer that uniquely identifies a message sent to a particular recipient.
