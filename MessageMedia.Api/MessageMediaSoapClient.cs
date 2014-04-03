@@ -29,7 +29,7 @@ namespace MessageMedia.Api
         /// <summary>
         /// This example demonstrates how to wrap the complexity associated with packaging up a message into a single method call for sending a single message.
         /// </summary>
-        /// <param name="from">From phone number</param>
+        /// <param name="from">From phone number - also known as Origin</param>
         /// <param name="to">To phone number</param>
         /// <param name="message">The content of the message</param>
         /// <param name="messageId">Your message identifier</param>
@@ -45,7 +45,7 @@ namespace MessageMedia.Api
             messageType.sequenceNumber = 1;
             messageType.scheduledSpecified = false;
             //messageType.scheduled = DateTime.Now;
-            messageType.origin = "This is the origin";
+            messageType.origin = from;
 
             #region Message Tags
             // Add the tags - if supported by your account type
