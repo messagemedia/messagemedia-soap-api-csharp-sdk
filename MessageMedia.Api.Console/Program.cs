@@ -35,7 +35,7 @@ namespace MessageMedia.Api.Console
             System.Console.WriteLine("EXECUTING SEND MESSAGE...");
             try
             {
-                int messageId = 1234567890;
+                uint messageId = 1234567890;
 
                 MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
                 var result = client.SendMessage(sentFromNumber, sentToNumber, "Test Message", messageId);

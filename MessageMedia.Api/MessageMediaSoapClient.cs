@@ -34,7 +34,7 @@ namespace MessageMedia.Api
         /// <param name="message">The content of the message</param>
         /// <param name="messageId">Your message identifier</param>
         /// <returns>SendMessagesResultType object.</returns>
-        public SendMessagesResultType SendMessage(string from, string to, string message, int messageId)
+        public SendMessagesResultType SendMessage(string from, string to, string message, uint messageId)
         {
             // Construct the message
             MessageType messageType = new MessageType();
@@ -84,7 +84,7 @@ namespace MessageMedia.Api
 
         public CheckRepliesResultType CheckReplies(uint maximumReplies = 100)
         {
-            return messageMediaSoapService.checkReplies(authentication, new CheckRepliesBodyType { maximumReplies = maximumReplies, maximumRepliesSpecified = (int)maximumReplies > 0 ? true : false });
+            return messageMediaSoapService.checkReplies(authentication, new CheckRepliesBodyType { maximumReplies = maximumReplies, maximumRepliesSpecified = (uint)maximumReplies > 0 ? true : false });
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace MessageMedia.Api
 
         public CheckReportsResultType CheckReports(uint maximumReports = 100)
         {
-            return messageMediaSoapService.checkReports(authentication, new CheckReportsBodyType() { maximumReports = maximumReports, maximumReportsSpecified = (int)maximumReports > 0 ? true : false });
+            return messageMediaSoapService.checkReports(authentication, new CheckReportsBodyType() { maximumReports = maximumReports, maximumReportsSpecified = (uint)maximumReports > 0 ? true : false });
         }
 
         public ConfirmReportsResultType ConfirmReports(List<uint> listOfReceiptIds)
@@ -154,7 +154,7 @@ namespace MessageMedia.Api
 
         public GetBlockedNumbersResultType GetBlockedNumbers(uint maximumRecipients = 100)
         {
-            return messageMediaSoapService.getBlockedNumbers(authentication, new GetBlockedNumbersBodyType() { maximumRecipients = maximumRecipients, maximumRecipientsSpecified = (int)maximumRecipients > 0 ? true : false });
+            return messageMediaSoapService.getBlockedNumbers(authentication, new GetBlockedNumbersBodyType() { maximumRecipients = maximumRecipients, maximumRecipientsSpecified = (uint)maximumRecipients > 0 ? true : false });
         }
 
         public BlockNumbersResultType BlockNumbers(RecipientType[] recipientType)
