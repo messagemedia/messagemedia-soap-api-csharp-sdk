@@ -1528,7 +1528,9 @@ public partial class SendMessagesResultType {
     
     private uint failedField;
     
-    /// <remarks/>
+    /// <summary>
+    /// Use of these properties on the SendMessagesResultType is deprecated. Use the CheckUserResultType instead.  This will support migration to the REST client.
+    /// </summary>
     public AccountDetailsType accountDetails {
         get {
             return this.accountDetailsField;
