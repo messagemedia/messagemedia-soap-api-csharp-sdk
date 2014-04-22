@@ -17,3 +17,5 @@ catch (Exception ex)
     System.Console.WriteLine("Error: {0}", ex.Message);
 }
 ```
+
+Start by looking at the entry point in  https://github.com/messagemedia/messagemedia-csharp/blob/master/MessageMedia.Api.Console/Program.cs
