@@ -83,6 +83,60 @@ namespace MessageMedia.Api
         }
 
         /// <summary>
+        /// This example demonstrates how to Schedule a message in the future
+        /// </summary>
+        /// <param name="from">From phone number - also known as Origin</param>
+        /// <param name="to">To phone number</param>
+        /// <param name="message">The content of the message</param>
+        /// <param name="messageId">Your message identifier</param>
+        /// / <param name="dateTime">Date time to be sent</param>
+        /// <returns>SendMessagesResultType object.</returns>
+        public SendMessagesResultType SendScheduledMessage(string from, string to, string message, uint messageId, DateTime dateTime)
+        {
+            // Construct the message
+            MessageType messageType = new MessageType();
+            messageType.content = message;
+            messageType.deliveryReport = true;
+            messageType.format = MessageFormatType.SMS;
+            messageType.validityPeriod = 1;
+            messageType.sequenceNumber = 1;
+            if (dateTime == DateTime.Now)
+            {
+                messageType.scheduledSpecified = false;
+            }
+            else
+            {
+                messageType.scheduledSpecified = true;
+            }
+            messageType.scheduled = dateTime;
+            messageType.origin = from;
+
+            #region Message Tags
+            // Add the tags - if supported by your account type
+            //MessageTagType[] tags = new MessageTagType[1];
+            //tags[0] = new MessageTagType { name = "My Tag Name", Value = "My Tag Value" };
+            //messageType.tags = tags; 
+            #endregion
+
+            // Add the recipients
+            RecipientType[] recipientType = new RecipientType[1];
+            recipientType[0] = new RecipientType { uid = (uint)messageId, Value = to };
+            messageType.recipients = recipientType;
+
+            // Create an array to store all the recipient messages.
+            MessageType[] messages = new MessageType[1];
+            messages[0] = messageType;
+
+            // Setup the send message body
+            SendMessagesBodyType sendMessageBody = new SendMessagesBodyType();
+            sendMessageBody.messages = new MessageListType();
+            sendMessageBody.messages.sendMode = MessageSendModeType.normal;
+            sendMessageBody.messages.message = messages;
+
+            return messageMediaSoapService.sendMessages(authentication, sendMessageBody);
+        }
+
+        /// <summary>
         /// This method takes a batch of messages which have been consructed and sends them.
         /// </summary>
         /// <param name="sendMessageBody">The object which contains the batch of messages.</param>
