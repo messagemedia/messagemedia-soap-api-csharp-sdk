@@ -51,7 +51,7 @@ namespace MessageMedia.Api
             messageType.content = message;
             messageType.deliveryReport = true;
             messageType.format = MessageFormatType.SMS;
-            messageType.validityPeriod = 1;
+            messageType.validityPeriod = 169;
             messageType.sequenceNumber = 1;
             messageType.scheduledSpecified = false;
             //messageType.scheduled = DateTime.Now;
@@ -98,7 +98,7 @@ namespace MessageMedia.Api
             messageType.content = message;
             messageType.deliveryReport = true;
             messageType.format = MessageFormatType.SMS;
-            messageType.validityPeriod = 1;
+            messageType.validityPeriod = 169;
             messageType.sequenceNumber = 1;
             if (dateTime == DateTime.Now)
             {
