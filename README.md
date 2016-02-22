@@ -35,9 +35,13 @@ Other available method calls:
 * SendMessage();
 * SendScheduledMessage();
 * ConstructAndSendBatchMessage();
-* CheckReplies(); 
+* CheckReplies();
+* ConfirmReplies();
 * CheckReports();
-
+* ConfirmReports();
+* DeleteScheduledMessages();
+* BlockNumbers();
+* UnblockNumbers();
 
 Please note that ConstructAndSendBatchMessage shows the ideal way to send to multiple recipients as it constructs a list of recipient numbers to send to.
 

@@ -50,7 +50,7 @@ namespace MessageMedia.Api.Console
         /// </summary>
         public static void CheckUserInfo()
         {
-            System.Console.WriteLine("--EXECUTING CheckUserInfo()...");
+            System.Console.WriteLine("EXECUTING CheckUserInfo()...");
             try
             {
                 MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
