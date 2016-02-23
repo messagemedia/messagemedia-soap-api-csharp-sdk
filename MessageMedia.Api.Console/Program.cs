@@ -32,11 +32,9 @@ namespace MessageMedia.Api.Console
             
             // Note: These are examples only, uncomment the method you'd like to test.
             CheckUserInfo();
-            //SendMessage();
-            //SendScheduledMessage();
-            //ConstructAndSendBatchMessage();
-            CheckReplies();
-            CheckReports();
+            SendMessage();
+            SendScheduledMessage();
+            ConstructAndSendBatchMessage();
 
             // Halt console program
             System.Console.WriteLine("\nHit any key to continue");
@@ -92,7 +90,8 @@ namespace MessageMedia.Api.Console
 
         #region SendScheduledMessage
         /// <summary>
-        /// Example demonstrates how to quickly send a single message with the default settings and a scheduled time in the future to recipient 1
+        /// Example demonstrates how to quickly send a single message with the default settings and a scheduled time in the future to recipient 1.
+        /// It also shows how to delete this scheduled message using the message id.
         /// </summary>
         public static void SendScheduledMessage()
         {
@@ -114,6 +113,8 @@ namespace MessageMedia.Api.Console
 
                 var result = client.SendScheduledMessage("", recipient1, message, messageId, messageScheduledDateTime);
                 DisplaySendMessageResult(result);
+                
+                DeleteScheduledMessages(new List<uint>{ messageId });
             }
             catch (Exception ex)
             {
