@@ -59,7 +59,7 @@ public partial class MessageMediaSoapService : System.Web.Services.Protocols.Soa
     
     /// <remarks/>
     public MessageMediaSoapService() {
-        this.Url = "https://soap.dev.m4u.com.au";
+        this.Url = "https://soap.m4u.com.au";
     }
     
     /// <remarks/>
