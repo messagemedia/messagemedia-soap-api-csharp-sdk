@@ -32,11 +32,10 @@ namespace MessageMedia.Api.Console
             
             // Note: These are examples only, uncomment the method you'd like to test.
             CheckUserInfo();
-            //SendMessage();
-            //SendScheduledMessage();
-            //ConstructAndSendBatchMessage();
-            CheckReplies();
-            CheckReports();
+            SendMessage();
+            SendScheduledMessage();
+            DeleteScheduledMessage();
+            ConstructAndSendBatchMessage();
 
             // Halt console program
             System.Console.WriteLine("\nHit any key to continue");
@@ -50,7 +49,7 @@ namespace MessageMedia.Api.Console
         /// </summary>
         public static void CheckUserInfo()
         {
-            System.Console.WriteLine("--EXECUTING CheckUserInfo()...");
+            System.Console.WriteLine("EXECUTING CheckUserInfo()...");
             try
             {
                 MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
@@ -92,7 +91,7 @@ namespace MessageMedia.Api.Console
 
         #region SendScheduledMessage
         /// <summary>
-        /// Example demonstrates how to quickly send a single message with the default settings and a scheduled time in the future to recipient 1
+        /// Example demonstrates how to quickly send a single message with the default settings and a scheduled time in the future to recipient 1.
         /// </summary>
         public static void SendScheduledMessage()
         {
@@ -114,6 +113,41 @@ namespace MessageMedia.Api.Console
 
                 var result = client.SendScheduledMessage("", recipient1, message, messageId, messageScheduledDateTime);
                 DisplaySendMessageResult(result);
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine("Error: {0}", ex.Message);
+            }
+        }
+        #endregion
+
+        #region DeleteScheduledMessage
+        /// <summary>
+        /// Example demonstrates how to delete a scheduled message. It first schedules one and then removes it using the messageId.
+        /// </summary>
+        public static void DeleteScheduledMessage()
+        {
+            System.Console.WriteLine("EXECUTING DeleteScheduledMessage()\nSending a single message to recipient 1 at a scheduled time in the future.\n Then removing it using the Message ID");
+            try
+            {
+                uint messageId = 123456789;
+                string message = "DeleteScheduledMessage executed.\n";
+
+                // Check whether the date time in App.config is valid otherwise put in today's time
+                System.Console.WriteLine("Scheduling Message");
+                DateTime messageScheduledDateTime;
+                if (!DateTime.TryParse(scheduledTimeString, out messageScheduledDateTime))
+                {
+                    messageScheduledDateTime = DateTime.Now;
+                }
+
+                MessageMediaSoapClient client = new MessageMediaSoapClient(userId, password);
+
+                var result = client.SendScheduledMessage("", recipient1, message, messageId, messageScheduledDateTime);
+                DisplaySendMessageResult(result);
+
+                System.Console.WriteLine("Deleting scheduled Message");
+                DeleteScheduledMessages(new List<uint> { messageId });
             }
             catch (Exception ex)
             {
