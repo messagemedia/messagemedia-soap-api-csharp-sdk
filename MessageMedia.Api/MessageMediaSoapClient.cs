@@ -55,7 +55,11 @@ namespace MessageMedia.Api
             messageType.sequenceNumber = 1;
             messageType.scheduledSpecified = false;
             //messageType.scheduled = DateTime.Now;
-            messageType.origin = from;
+
+            if (!String.IsNullOrEmpty(from))
+            {
+                messageType.origin = from;
+            }
 
             #region Message Tags
             // Add the tags - if supported by your account type
@@ -109,7 +113,11 @@ namespace MessageMedia.Api
                 messageType.scheduledSpecified = true;
             }
             messageType.scheduled = dateTime;
-            messageType.origin = from;
+
+            if (!String.IsNullOrEmpty(from))
+            {
+                messageType.origin = from;
+            }
 
             #region Message Tags
             // Add the tags - if supported by your account type
