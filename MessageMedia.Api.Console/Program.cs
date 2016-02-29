@@ -184,7 +184,7 @@ namespace MessageMedia.Api.Console
                 uint messageId = 123456789;
                 // Note: This needs to be enabled for your account in order to send from a dedicated numberplease contact MessageMedia Support for details
                 // (Optional) This element specifies the message source address. The specified address will be used wherever possible, however due to limitations with various carriers, legislation etc, the final message is not guaranteed to come from the specified address.
-                message.origin = "";
+                message.origin = null;
                 // Delivery reports when requested (TRUE) will allow customers to see if a message has been delivered. 
                 // Please note you can view the report within our MessageMedia Manager interface and requesting a deliveryReport incurs additional fees per message. 
                 message.deliveryReport = false;
