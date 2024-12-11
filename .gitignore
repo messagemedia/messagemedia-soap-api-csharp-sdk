@@ -157,3 +157,6 @@ $RECYCLE.BIN/
 
 # Local File
 Readme.Local.txt
+
+#Visual Studio
+.vs

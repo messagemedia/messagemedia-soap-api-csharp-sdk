@@ -173,7 +173,7 @@
   </xsd:complexType>
   <xsd:complexType name="ConfirmItemType">
     <xsd:sequence />
-    <xsd:attribute name="receiptId" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="receiptId" type="xsd:unsignedLong" use="required" />
   </xsd:complexType>
   <xsd:complexType name="BlockNumbersBodyType">
     <xsd:sequence>

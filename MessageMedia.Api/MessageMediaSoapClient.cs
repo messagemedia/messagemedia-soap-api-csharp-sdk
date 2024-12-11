@@ -156,7 +156,7 @@ namespace MessageMedia.Api
         /// </summary>
         /// <param name="listOfReceiptIds"></param>
         /// <returns></returns>
-        public ConfirmRepliesResultType ConfirmReplies(List<uint> listOfReceiptIds)
+        public ConfirmRepliesResultType ConfirmReplies(List<ulong> listOfReceiptIds)
         {
             // Take the list of receiptId's and prepare them for submission to the SOAP API in the expected format.
             ConfirmItemType[] confirmItemType = new ConfirmItemType[listOfReceiptIds.Count];
@@ -175,7 +175,7 @@ namespace MessageMedia.Api
             return messageMediaSoapService.checkReports(authentication, new CheckReportsBodyType() { maximumReports = maximumReports, maximumReportsSpecified = (uint)maximumReports > 0 ? true : false });
         }
 
-        public ConfirmReportsResultType ConfirmReports(List<uint> listOfReceiptIds)
+        public ConfirmReportsResultType ConfirmReports(List<ulong> listOfReceiptIds)
         {
             // Take the list of receiptId's and prepare them for submission to the SOAP API in the expected format.
             ConfirmItemType[] confirmItemType = new ConfirmItemType[listOfReceiptIds.Count];
