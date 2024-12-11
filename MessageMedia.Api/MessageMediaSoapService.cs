@@ -1040,11 +1040,11 @@ public partial class ConfirmReportsBodyType {
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://xml.m4u.com.au/2009")]
 public partial class ConfirmItemType {
     
-    private uint receiptIdField;
+    private ulong receiptIdField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint receiptId {
+    public ulong receiptId {
         get {
             return this.receiptIdField;
         }
@@ -1112,7 +1112,7 @@ public partial class ReportType {
     
     private uint uidField;
     
-    private uint receiptIdField;
+    private ulong receiptIdField;
     
     private DeliveryStatusType statusField;
     
@@ -1149,7 +1149,7 @@ public partial class ReportType {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint receiptId {
+    public ulong receiptId {
         get {
             return this.receiptIdField;
         }
@@ -1286,7 +1286,7 @@ public partial class ReplyType {
     
     private uint uidField;
     
-    private uint receiptIdField;
+    private ulong receiptIdField;
     
     /// <remarks/>
     public string origin {
@@ -1342,7 +1342,7 @@ public partial class ReplyType {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlAttributeAttribute()]
-    public uint receiptId {
+    public ulong receiptId {
         get {
             return this.receiptIdField;
         }

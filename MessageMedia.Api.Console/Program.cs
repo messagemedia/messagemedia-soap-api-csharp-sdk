@@ -302,7 +302,7 @@ namespace MessageMedia.Api.Console
                 if (reply.replies == null) return;
 
                 // Create a list to hold the receipts of the replies you want to confirm you have received.
-                List<uint> listOfReceiptIds = new List<uint>();
+                List<ulong> listOfReceiptIds = new List<ulong>();
 
                 foreach (var item in reply.replies)
                 {
@@ -329,7 +329,7 @@ namespace MessageMedia.Api.Console
         /// Example demonstrates how to confirm receipt of a list of replies.
         /// </summary>
         /// <param name="listOfReceiptIds">List of receiptId's</param>
-        private static void ConfirmReplies(List<uint> listOfReceiptIds)
+        private static void ConfirmReplies(List<ulong> listOfReceiptIds)
         {
             System.Console.WriteLine("EXECUTING CONFIRM REPLIES....");
             if (listOfReceiptIds.Count == 0) return;
@@ -366,7 +366,7 @@ namespace MessageMedia.Api.Console
                 if (reply.reports == null) return;
 
                 // Create a list to hold the receipts of the reports you want to confirm you have received.
-                List<uint> listOfReceiptIds = new List<uint>();
+                List<ulong> listOfReceiptIds = new List<ulong>();
 
                 foreach (var item in reply.reports)
                 {
@@ -396,7 +396,7 @@ namespace MessageMedia.Api.Console
         /// Example demonstrates how to confirm receipt of a list of reports.
         /// </summary>
         /// <param name="listOfReceiptIds">List of receiptId's</param>
-        private static void ConfirmReports(List<uint> listOfReceiptIds)
+        private static void ConfirmReports(List<ulong> listOfReceiptIds)
         {
             System.Console.WriteLine("EXECUTING CONFIRM REPORTS....");
             if (listOfReceiptIds.Count == 0) return;

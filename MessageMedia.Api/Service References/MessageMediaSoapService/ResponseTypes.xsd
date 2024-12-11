@@ -145,7 +145,7 @@
     </xsd:sequence>
     <xsd:attribute name="format" type="MessageFormatType" use="required" />
     <xsd:attribute name="uid" type="xsd:unsignedInt" use="required" />
-    <xsd:attribute name="receiptId" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="receiptId" type="xsd:unsignedLong" use="required" />
   </xsd:complexType>
   <xsd:complexType name="ReportListType">
     <xsd:sequence>
@@ -158,7 +158,7 @@
       <xsd:element name="timestamp" type="xsd:dateTime" />
     </xsd:sequence>
     <xsd:attribute name="uid" type="xsd:unsignedInt" use="required" />
-    <xsd:attribute name="receiptId" type="xsd:unsignedInt" use="required" />
+    <xsd:attribute name="receiptId" type="xsd:unsignedLong" use="required" />
     <xsd:attribute name="status" type="DeliveryStatusType" use="required" />
   </xsd:complexType>
   <xsd:simpleType name="DeliveryStatusType">
